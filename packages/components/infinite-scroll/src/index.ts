@@ -169,7 +169,7 @@ const InfiniteScroll: ObjectDirective<
   },
   async updated(el) {
     if (!el[SCOPE]) {
-      await nextTick()
+      return;
     }
     const { containerEl, cb, observer } = el[SCOPE]
     if (containerEl.clientHeight && observer) {
