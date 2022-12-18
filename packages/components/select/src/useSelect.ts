@@ -515,11 +515,14 @@ export const useSelect = (props, states: States, ctx) => {
       }
     }
     if (option) return option
-    const label = isObjectValue
-      ? value.label
-      : !isNull && !isUndefined
-      ? value
-      : ''
+    let label;
+    if (isObjectValue && props.labelKey) {
+        label = get(value, props.labelKey);
+    } else if (!isNull && !isUndefined) {
+        label = String(value);
+    } else {
+        label = "";
+    }
     const newOption = {
       value,
       currentLabel: label,
